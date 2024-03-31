@@ -13,7 +13,7 @@ export function UserProvider({ children }) {
     const [isFetching, setIsFetching] = useState(false);
 
     const login = useCallback(async () => {
-        const request = await fetch("https://website-demonstration-back-end.vercel.app/api/v1/auth");
+        const request = await fetch("https://website-demonstration-back-end.vercel.app/api/v1/auth", { credentials: "include" });
         const response = await request.json();
         if (request.status === 200) {
             localStorage.setItem("user", JSON.stringify(response.user));
@@ -27,6 +27,7 @@ export function UserProvider({ children }) {
     const logout = useCallback(async () => {
         const response = await fetch("https://website-demonstration-back-end.vercel.app/api/v1/auth/logout", {
             method: "DELETE",
+            credentials: "include",
         });
 
         if (response.status === 200) {
